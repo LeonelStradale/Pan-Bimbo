@@ -8,10 +8,10 @@
             <div class="row">
                 <div class="col-lg-12 margin-tb">
                     <div class="pull-left">
-                        <h2>Add New Product</h2>
+                        <h2>Crear nuevo documento</h2>
                     </div>
                     <div class="pull-right">
-                        <a class="btn btn-primary" href="{{ route('documents.index') }}"> Back</a>
+                        <a class="btn btn-primary" href="{{ route('documents.index') }}"> Regresar</a>
                     </div>
                 </div>
             </div>
@@ -33,18 +33,18 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Name:</strong>
+                            <strong>Nombre:</strong>
                             <input type="text" name="name" class="form-control" placeholder="Name">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Document:</strong>
+                            <strong>Documento:</strong>
                             <input type="file" name="document" class="form-control" placeholder="document">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
 
