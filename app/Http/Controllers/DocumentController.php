@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
 use App\Models\Document;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,8 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        return view("documents.create");
+        $areas = Area::all();
+        return view("documents.create", compact('areas'));
     }
 
     /**
@@ -34,6 +36,7 @@ class DocumentController extends Controller
         $request->validate([
             'name' => 'required',
             'document' => 'required',
+            'area_id' => 'required|exists:areas,id',
         ]);
 
         $data = $request->all();
@@ -96,7 +99,6 @@ class DocumentController extends Controller
         $document->update($input);
 
         return redirect()->route('documents.index')->with('success', 'El documento se ha actualizado con éxito.');
-
     }
 
     /**

@@ -5,18 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Document extends Model
+class Area extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'area_id',
-        'name',
-        'document',
+        'name'
     ];
 
-    public function area()
+    public function documents()
     {
-        return $this->belongsTo(Area::class);
+        return $this->hasMany(Document::class);
     }
 }
