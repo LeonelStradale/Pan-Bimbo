@@ -25,7 +25,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -56,10 +56,20 @@
                                 </li>
                             @endif
                         @else
+                        <a class="nav-link" href="{{ route('areas.index') }}">
+                            Áreas Administrativas
+                            <i class="fa-solid fa-folder-open"></i>
+                        </a>
+                        <a class="nav-link" href="{{ route('documents.index') }}">
+                            Documentos
+                            <i class="fa-solid fa-print"></i>
+                        </a>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+
+                                <a id="navbarDropdown" class="btn btn-primary dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
+                                    <i class="fa-solid fa-user"></i>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

@@ -13,9 +13,9 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $documents = Document::latest()->paginate(10);
+        $documents = Document::with('area')->latest()->paginate(10);
 
-        return view("documents.index", compact("documents"));
+        return view('documents.index', compact('documents'));
     }
 
     /**
@@ -24,6 +24,7 @@ class DocumentController extends Controller
     public function create()
     {
         $areas = Area::all();
+
         return view("documents.create", compact('areas'));
     }
 
@@ -32,26 +33,26 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        // Se validan los datos
         $request->validate([
-            'name' => 'required',
-            'document' => 'required',
+            'name' => 'required|string',
+            'type_of_document' => 'required|string',
+            'document' => 'required|file',
             'area_id' => 'required|exists:areas,id',
         ]);
 
+        
         $data = $request->all();
 
-        // Se valida el documento y se crea una ruta para su guardado en una carpeta del proyecto
         if ($document = $request->file('document')) {
-            $destinationPath = 'docs/'; // Ruta de guardado
-            $fileName = date('YmdHis') . '.' . $document->getClientOriginalExtension(); // Formato de nombre de guardado
-            $document->move($destinationPath, $fileName); // Mover a la carpeta destino
-            $data['document'] = $fileName; // Asignar al campo de guardado
+            $destinationPath = 'docs/';
+            $fileName = $request->name . '.' . $document->getClientOriginalExtension();
+            $document->move($destinationPath, $fileName);
+            $data['document'] = $fileName;
         }
 
         Document::create($data);
 
-        return redirect()->route('documents.index')->with('success', 'El documento se guardo con éxito.');
+        return redirect()->route('documents.index')->with('success', 'Document created successfully.');
     }
 
     /**
@@ -67,7 +68,9 @@ class DocumentController extends Controller
      */
     public function edit(Document $document)
     {
-        return view('documents.edit', compact('document'));
+        $areas = Area::all();
+
+        return view('documents.edit', compact('document', 'areas'));
     }
 
     /**
@@ -76,15 +79,17 @@ class DocumentController extends Controller
     public function update(Request $request, Document $document)
     {
         $request->validate([
-            'name' => 'required',
-            'document' => 'file|mimes:pdf,doc,docx|max:2048',
+            'name' => 'required|string',
+            'type_of_document' => 'required|string',
+            'document' => 'required',
+            'area_id' => 'required|exists:areas,id',
         ]);
 
         $input = $request->all();
 
         if ($file = $request->file('document')) {
             $destinationPath = 'docs/';
-            $fileName = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $fileName = $request->name . "." . $file->getClientOriginalExtension();
             $file->move($destinationPath, $fileName);
             $input['document'] = "$fileName";
 
@@ -106,7 +111,6 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
-        // Elimina el documento
         $document->delete();
 
         return redirect()->route('documents.index')->with('success', 'El documento se elimino con éxito.');

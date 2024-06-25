@@ -12,6 +12,7 @@ class Document extends Model
     protected $fillable = [
         'area_id',
         'name',
+        'type_of_document',
         'document',
     ];
 
