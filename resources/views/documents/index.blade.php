@@ -116,15 +116,20 @@
                                             <a href="{{ route('documents.show', $document->id) }}"
                                                 class="btn btn-secondary me-2">
                                                 Mostrar
+                                                <i class="fa-solid fa-eye"></i>
                                             </a>
                                             <a href="{{ route('documents.edit', $document->id) }}"
                                                 class="btn btn-primary me-2">
                                                 Editar
+                                                <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
                                             <form action="{{ route('documents.destroy', $document->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                <button type="submit" class="btn btn-danger">
+                                                    Eliminar
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

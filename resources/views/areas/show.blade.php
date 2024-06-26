@@ -27,7 +27,7 @@
                 <div class="col">
                     <div class="card h-100">
                         <div class="position-relative">
-                            <iframe src="{{ url('docs/' . $document->document) }}" class="card-img-top"
+                            <iframe src="https://docs.google.com/gview?url={{ url('docs/' . $document->document) }}&embedded=true" class="card-img-top"
                                 style="height: 300px;"></iframe>
                             <a href="{{ url('docs/' . $document->document) }}" download
                                 class="btn btn-lg btn-danger download-btn d-flex justify-content-center rounded-lg">

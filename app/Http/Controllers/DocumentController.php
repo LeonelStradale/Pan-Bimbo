@@ -40,7 +40,7 @@ class DocumentController extends Controller
             'area_id' => 'required|exists:areas,id',
         ]);
 
-        
+
         $data = $request->all();
 
         if ($document = $request->file('document')) {
@@ -58,9 +58,9 @@ class DocumentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Document $document)
     {
-        //
+        return view('documents.show', compact('document'));
     }
 
     /**
